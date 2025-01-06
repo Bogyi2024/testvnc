@@ -1,0 +1,23 @@
+name: VNC Viewer on Windows
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  vnc-job:
+    runs-on: windows-latest
+
+    steps:
+      - name: Install TightVNC
+        run: |
+          choco install tightvnc --yes
+
+      - name: Start TightVNC Server
+        run: |
+          # Configure a password for VNC
+          echo password123 | tightvncpasswd
+          
+          # Start the TightVNC Server
+          "C:\Program Files\TightVNC\tvnserver.exe" -run
